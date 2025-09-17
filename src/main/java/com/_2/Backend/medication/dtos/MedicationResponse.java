@@ -6,11 +6,12 @@ import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor @AllArgsConstructor
+@Builder
 public class MedicationResponse {
     private Long id;
     private String name;
-    private String dosage;
-    private String frequency;
+    private String dose;
+    private String frequencyDisplay;
     private LocalTime timeToTake;
     private boolean active;
     private boolean taken;
