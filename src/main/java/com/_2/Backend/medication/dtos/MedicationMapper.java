@@ -18,7 +18,7 @@ public class MedicationMapper {
         .id(entity.getId())
         .name(entity.getName())
         .dose(entity.getDose())
-        .frequencyDisplay(entity.getFrequency().getDisplayInSpanish)
+        .frequencyDisplay(entity.getFrequency().getDisplayInSpanish())
         .timeToTake(entity.getTimeToTake())
         .active(entity.isActive())
         .taken(entity.isTaken())
