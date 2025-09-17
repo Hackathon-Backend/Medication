@@ -1,4 +1,9 @@
-package com._2.Backend.reminder.Service;
+package com._2.Backend.reminder;
+
+import com._2.Backend.reminder.dto.ReminderRequest;
+import com._2.Backend.reminder.dto.ReminderResponse;
+
+import java.util.List;
 
 public interface ReminderService {
     List<ReminderResponse> getAllReminders();
