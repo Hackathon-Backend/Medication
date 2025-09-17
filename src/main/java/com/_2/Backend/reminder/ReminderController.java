@@ -21,18 +21,18 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "Reminders", description = "Endpoints for managing reminders")
+@Tag(name = "Recordatorios", description = "Endpoints para gestionar recordatorios")
 @RequestMapping("/api/reminders")
 public class ReminderController {
 
     private final ReminderServiceImpl reminderService;
 
     @Operation(
-            summary = "Get all reminders",
-            description = "Returns a list of all reminders."
+            summary = "Obtener todos los recordatorios",
+            description = "Devuelve una lista con todos los recordatorios registrados."
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Reminders retrieved successfully",
+            @ApiResponse(responseCode = "200", description = "Recordatorios obtenidos correctamente",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReminderResponse.class))))
     })
     @GetMapping
@@ -41,11 +41,11 @@ public class ReminderController {
     }
 
     @Operation(
-            summary = "Get active reminders",
-            description = "Returns only active reminders."
+            summary = "Obtener recordatorios activos",
+            description = "Devuelve únicamente los recordatorios que están activos."
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Active reminders retrieved successfully",
+            @ApiResponse(responseCode = "200", description = "Recordatorios activos obtenidos correctamente",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReminderResponse.class))))
     })
     @GetMapping("/active")
@@ -54,11 +54,11 @@ public class ReminderController {
     }
 
     @Operation(
-            summary = "Create a new reminder",
-            description = "Adds a new reminder linked to a medication."
+            summary = "Crear un nuevo recordatorio",
+            description = "Agrega un nuevo recordatorio vinculado a un medicamento."
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Reminder created successfully",
+            @ApiResponse(responseCode = "201", description = "Recordatorio creado correctamente",
                     content = @Content(schema = @Schema(implementation = ReminderResponse.class)))
     })
     @PostMapping
@@ -70,13 +70,13 @@ public class ReminderController {
     }
 
     @Operation(
-            summary = "Mark reminder as taken",
-            description = "Marks an existing reminder as taken by the user."
+            summary = "Marcar recordatorio como tomado",
+            description = "Marca un recordatorio existente como tomado por el usuario."
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Reminder marked as taken successfully",
+            @ApiResponse(responseCode = "200", description = "Recordatorio marcado como tomado correctamente",
                     content = @Content(schema = @Schema(implementation = ReminderResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Reminder not found", content = @Content)
+            @ApiResponse(responseCode = "404", description = "Recordatorio no encontrado", content = @Content)
     })
     @PutMapping("/{id}/taken")
     public ResponseEntity<ReminderResponse> markAsTaken(@PathVariable Long id) {
