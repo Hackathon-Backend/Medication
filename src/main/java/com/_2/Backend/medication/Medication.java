@@ -1,6 +1,7 @@
 package com._2.Backend.medication;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,10 +18,20 @@ public class Medication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     private String name;
+
+    @NotNull
     private String dose;
-    private String frequency;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Frequency frequency;
+
+    @NotNull
     private LocalTime timeToTake;
+
     private boolean active = true;
     private boolean taken = false;
 }
