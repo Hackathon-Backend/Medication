@@ -1,0 +1,59 @@
+package com._2.Backend.medication.service;
+
+import com._2.Backend.medication.Medication;
+import com._2.Backend.medication.MedicationRepository;
+import com._2.Backend.medication.dtos.MedicationMapper;
+import com._2.Backend.medication.dtos.MedicationRequest;
+import com._2.Backend.medication.dtos.MedicationResponse;
+import com._2.Backend.medication.exceptions.MedicationNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class MedicationServiceImpl  implements MedicationService{
+    private final MedicationRepository medicationRepository;
+
+    @Override
+    public MedicationResponse createMedication(MedicationRequest request) {
+        Medication newMedication = MedicationMapper.dtoToEntity(request);
+
+        newMedication.setActive(true);
+        newMedication.setTaken(false);
+
+        Medication savedMedication = medicationRepository.save(newMedication);
+
+        return MedicationMapper.entityToDto(savedMedication);
+    }
+
+    @Override
+    public List<MedicationResponse> getAllMedications() {
+        return medicationRepository.findAll()
+                .stream()
+                .map(MedicationMapper::entityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public MedicationResponse markAsTaken(Long id) {
+        Medication medication = medicationRepository.findById(id)
+                .orElseThrow(() -> new MedicationNotFoundException("Medication not found with id: " + id));
+
+        medication.setTaken(true);
+        Medication updatedMedication = medicationRepository.save(medication);
+
+        return MedicationMapper.entityToDto(updatedMedication);
+    }
+
+    @Override
+    public void deleteMedication(Long id) {
+        if (!medicationRepository.existsById(id)) {
+            throw new MedicationNotFoundException("Medication not found with id: " + id);
+        }
+        medicationRepository.deleteById(id);
+    }
+
+}
