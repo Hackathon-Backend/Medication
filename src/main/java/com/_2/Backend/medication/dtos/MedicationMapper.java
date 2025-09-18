@@ -16,6 +16,15 @@ public class MedicationMapper {
         return entity;
     }
 
+    public static void updateEntityFromDto(MedicationRequest dto, Medication entity) {
+        entity.setName(dto.getName());
+        entity.setDose(dto.getDose());
+        entity.setFrequency(dto.getFrequency());
+        entity.setTimeToTake(dto.getTimeToTake());
+        entity.setIntervalHours(dto.getIntervalHours());
+        entity.setIntervalDays(dto.getIntervalDays());
+    }
+
     public static MedicationResponse entityToDto(Medication entity) {
         return MedicationResponse.builder()
         .id(entity.getId())
