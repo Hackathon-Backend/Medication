@@ -23,7 +23,7 @@ public class MedicationServiceImpl  implements MedicationService{
         if (request.getFrequency() == Frequency.CUSTOM) {
             if ((request.getIntervalHours() == null || request.getIntervalHours() <= 0) && (request.getIntervalDays() == null || request.getIntervalDays() <= 0)) {
                 throw new IllegalArgumentException(
-                        "Para Personalizar, deberás especificar el intérvalo de Horas o intérvalo de Días"
+                        "Para Personalizar, deberás especificar el intervalo de Horas o intervalo de Días"
                 );
             }
         }
