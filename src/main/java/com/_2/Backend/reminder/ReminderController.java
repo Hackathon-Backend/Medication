@@ -3,6 +3,7 @@ package com._2.Backend.reminder;
 
 import com._2.Backend.reminder.dtos.ReminderRequest;
 import com._2.Backend.reminder.dtos.ReminderResponse;
+import com._2.Backend.reminder.services.ReminderService;
 import com._2.Backend.reminder.services.ReminderServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -25,7 +26,7 @@ import java.util.List;
 @RequestMapping("/api/reminders")
 public class ReminderController {
 
-    private final ReminderServiceImpl reminderService;
+    private final ReminderService reminderService;
 
     @Operation(
             summary = "Obtener todos los recordatorios",
