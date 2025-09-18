@@ -33,5 +33,4 @@ public class Medication {
     private LocalTime timeToTake;
 
     private boolean active = true;
-    private boolean taken = false;
 }
