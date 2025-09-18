@@ -13,6 +13,7 @@ public class MedicationResponse {
     private String dose;
     private String frequencyDisplay;
     private LocalTime timeToTake;
+    private Integer intervalHours;
+    private Integer intervalDays;
     private boolean active;
-    private boolean taken;
 }
