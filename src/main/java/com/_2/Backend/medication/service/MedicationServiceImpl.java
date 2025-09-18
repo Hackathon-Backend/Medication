@@ -22,7 +22,6 @@ public class MedicationServiceImpl  implements MedicationService{
         Medication newMedication = MedicationMapper.dtoToEntity(request);
 
         newMedication.setActive(true);
-        newMedication.setTaken(false);
 
         Medication savedMedication = medicationRepository.save(newMedication);
 
@@ -42,7 +41,6 @@ public class MedicationServiceImpl  implements MedicationService{
         Medication medication = medicationRepository.findById(id)
                 .orElseThrow(() -> new MedicationNotFoundException(id));
 
-        medication.setTaken(true);
         Medication updatedMedication = medicationRepository.save(medication);
 
         return MedicationMapper.entityToDto(updatedMedication);
