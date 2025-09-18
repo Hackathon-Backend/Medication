@@ -1,4 +1,4 @@
-package com._2.Backend.config;
+package com._2.Backend.security;
 
 import com._2.Backend.medication.exceptions.MedicationNotFoundException;
 import com._2.Backend.reminder.exceptions.InvalidReminderTimeException;
