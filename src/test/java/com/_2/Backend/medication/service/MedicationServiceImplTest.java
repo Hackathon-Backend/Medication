@@ -7,8 +7,8 @@ import com._2.Backend.medication.dtos.MedicationRequest;
 import com._2.Backend.medication.dtos.MedicationResponse;
 import com._2.Backend.medication.exceptions.MedicationNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -19,11 +19,9 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
 class MedicationServiceImplTest {
 
     @Nested
@@ -63,8 +61,11 @@ class MedicationServiceImplTest {
 
             MedicationResponse response = medicationService.createMedication(request);
 
-            assertThat(response.getName()).isEqualTo("Paracetamol");
-            assertThat(response.getDose()).isEqualTo("500mg");
+            assertNotNull(response);
+            assertEquals(1L, response.getId());
+            assertEquals("Paracetamol", response.getName());
+            assertEquals("500mg", response.getDose());
+            assertEquals("Una vez al día", response.getFrequencyDisplay());
         }
 
         @Test
@@ -92,6 +93,7 @@ class MedicationServiceImplTest {
     }
 
     @Nested
+    @SpringBootTest
     class IntegrationTests {
 
         @Autowired
@@ -116,6 +118,7 @@ class MedicationServiceImplTest {
             MedicationResponse response = medicationServiceImpl.createMedication(req);
             assertNotNull(response.getId());
             assertEquals("Amoxicilina", response.getName());
+            assertEquals("250mg", response.getDose());
         }
 
         @Test
