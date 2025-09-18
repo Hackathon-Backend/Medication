@@ -1,11 +1,8 @@
 package com._2.Backend.medication.exceptions;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(HttpStatus.NOT_FOUND)
 public class MedicationNotFoundException extends RuntimeException {
-    public MedicationNotFoundException(String message) {
-        super(message);
+
+    public MedicationNotFoundException(Long id) {
+        super("Medicamento no encontrado con id: " + id);
     }
 }
