@@ -11,4 +11,5 @@ public interface ReminderService {
     List<ReminderResponse> getTodayReminders();
     ReminderResponse createReminder(ReminderRequest request);
     ReminderResponse markAsTaken(Long id);
+    void deleteReminder(Long id);
 }
