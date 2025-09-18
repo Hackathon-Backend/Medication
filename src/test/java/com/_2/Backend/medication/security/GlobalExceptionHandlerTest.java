@@ -1,6 +1,6 @@
-package com._2.Backend.medication.config;
+package com._2.Backend.medication.security;
 
-import com._2.Backend.config.GlobalExceptionHandler;
+import com._2.Backend.security.GlobalExceptionHandler;
 import com._2.Backend.medication.exceptions.MedicationNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
