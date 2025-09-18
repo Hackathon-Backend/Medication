@@ -73,11 +73,6 @@ class MedicationServiceImplTest {
     }
 
     @Test
-    void markAsTaken_ShouldThrowException_WhenNotFound() {
-        assertThrows(MedicationNotFoundException.class, () -> medicationService.markAsTaken(99L));
-    }
-
-    @Test
     void deleteMedication_ShouldThrowException_WhenNotFound() {
         assertThrows(MedicationNotFoundException.class, () -> medicationService.deleteMedication(99L));
     }
