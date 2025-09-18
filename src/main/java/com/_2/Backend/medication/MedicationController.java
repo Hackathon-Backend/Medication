@@ -31,12 +31,6 @@ public class MedicationController {
         return ResponseEntity.ok(medications);
     }
 
-    @PutMapping("/{id}/taken")
-    public ResponseEntity<MedicationResponse> markAsTaken(@PathVariable Long id) {
-        MedicationResponse updatedMedication = medicationService.markAsTaken(id);
-        return ResponseEntity.ok(updatedMedication);
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMedication(@PathVariable Long id) {
         medicationService.deleteMedication(id);
