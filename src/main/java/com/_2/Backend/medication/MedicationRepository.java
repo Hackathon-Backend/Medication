@@ -13,6 +13,4 @@ public interface MedicationRepository extends JpaRepository<Medication, Long> {
     List<Medication> findByTimeToTake(LocalTime timeToTake);
     List<Medication> findByName(String name);
     List<Medication> findByNameContainingIgnoreCase(String name);
-    List<Medication> findByTakenFalseAndActiveTrueOrderByTimeToTakeAsc();
-    List<Medication> findByTakenTrueOrderByTimeToTakeDesc();
 }
