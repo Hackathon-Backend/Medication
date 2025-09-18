@@ -13,5 +13,4 @@ public class ReminderResponse {
     private Boolean active;
     private Boolean taken;
     private String medicationName;
-
 }
