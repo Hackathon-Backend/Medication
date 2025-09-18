@@ -8,6 +8,5 @@ import java.util.List;
 public interface MedicationService {
     MedicationResponse createMedication(MedicationRequest request);
     List<MedicationResponse> getAllMedications();
-    MedicationResponse markAsTaken(Long id);
     void deleteMedication(Long id);
 }
