@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/medications")
+@RequestMapping("/api/medications")
 @RequiredArgsConstructor
 public class MedicationController {
 
@@ -29,6 +29,14 @@ public class MedicationController {
     public ResponseEntity<List<MedicationResponse>> getAllMedications() {
         List<MedicationResponse> medications = medicationService.getAllMedications();
         return ResponseEntity.ok(medications);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MedicationResponse> updateMedication(
+            @PathVariable Long id,
+            @Valid @RequestBody MedicationRequest request) {
+        MedicationResponse updatedMedication = medicationService.updateMedication(id, request);
+        return ResponseEntity.ok(updatedMedication);
     }
 
     @DeleteMapping("/{id}")
