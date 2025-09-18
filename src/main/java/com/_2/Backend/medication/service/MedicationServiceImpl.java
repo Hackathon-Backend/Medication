@@ -40,7 +40,7 @@ public class MedicationServiceImpl  implements MedicationService{
     @Override
     public MedicationResponse markAsTaken(Long id) {
         Medication medication = medicationRepository.findById(id)
-                .orElseThrow(() -> new MedicationNotFoundException("Medicamento no encontrado con id: " + id));
+                .orElseThrow(() -> new MedicationNotFoundException(id));
 
         medication.setTaken(true);
         Medication updatedMedication = medicationRepository.save(medication);
@@ -51,7 +51,7 @@ public class MedicationServiceImpl  implements MedicationService{
     @Override
     public void deleteMedication(Long id) {
         if (!medicationRepository.existsById(id)) {
-            throw new MedicationNotFoundException("Medicamento no encontrado con id: " + id);
+            throw new MedicationNotFoundException(id);
         }
         medicationRepository.deleteById(id);
     }
