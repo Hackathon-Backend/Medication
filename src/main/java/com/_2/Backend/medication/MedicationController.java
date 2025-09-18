@@ -3,6 +3,8 @@ package com._2.Backend.medication;
 import com._2.Backend.medication.dtos.MedicationRequest;
 import com._2.Backend.medication.dtos.MedicationResponse;
 import com._2.Backend.medication.service.MedicationService;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,7 @@ public class MedicationController {
     private final MedicationService medicationService;
 
     @PostMapping
-    public ResponseEntity<MedicationResponse> createMedication(@RequestBody MedicationRequest request) {
+    public ResponseEntity<MedicationResponse> createMedication(@Valid @RequestBody MedicationRequest request) {
         MedicationResponse createdMedication = medicationService.createMedication(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdMedication);
     }
