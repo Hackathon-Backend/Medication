@@ -44,16 +44,6 @@ public class MedicationServiceImpl  implements MedicationService{
     }
 
     @Override
-    public MedicationResponse markAsTaken(Long id) {
-        Medication medication = medicationRepository.findById(id)
-                .orElseThrow(() -> new MedicationNotFoundException(id));
-
-        Medication updatedMedication = medicationRepository.save(medication);
-
-        return MedicationMapper.entityToDto(updatedMedication);
-    }
-
-    @Override
     public void deleteMedication(Long id) {
         if (!medicationRepository.existsById(id)) {
             throw new MedicationNotFoundException(id);
