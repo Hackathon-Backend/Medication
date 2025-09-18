@@ -44,6 +44,25 @@ public class MedicationServiceImpl  implements MedicationService{
     }
 
     @Override
+    public MedicationResponse updateMedication(Long id, MedicationRequest request) {
+        Medication medication = medicationRepository.findById(id)
+                .orElseThrow(() -> new MedicationNotFoundException(id));
+
+        MedicationMapper.updateEntityFromDto(request, medication);
+
+        if(request.getFrequency() == Frequency.CUSTOM) {
+            if ((request.getIntervalHours() == null || request.getIntervalHours() <= 0) && (request.getIntervalDays() == null || request.getIntervalDays() <= 0)) {
+                throw new IllegalArgumentException(
+                        "Para Personalizar, deberás especificar el intervalo de Horas o intervalo de Días"
+                );
+            }
+        }
+
+        medicationRepository.save(medication);
+        return MedicationMapper.entityToDto(medication);
+    }
+
+    @Override
     public void deleteMedication(Long id) {
         if (!medicationRepository.existsById(id)) {
             throw new MedicationNotFoundException(id);

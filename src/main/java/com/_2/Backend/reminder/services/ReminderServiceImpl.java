@@ -77,4 +77,11 @@ public class ReminderServiceImpl implements ReminderService {
 
         return ReminderMapper.entityToDto(reminder);
     }
+
+    @Override
+    public void deleteReminder(Long id) {
+        Reminder reminder = reminderRepository.findById(id)
+                .orElseThrow(() -> new ReminderNotFoundException(id));
+        reminderRepository.delete(reminder);
+    }
 }

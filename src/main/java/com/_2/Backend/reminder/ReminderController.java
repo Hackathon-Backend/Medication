@@ -84,4 +84,9 @@ public class ReminderController {
         ReminderResponse updatedReminder = reminderService.markAsTaken(id);
         return ResponseEntity.ok(updatedReminder);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteReminder(@PathVariable Long id) {
+        reminderService.deleteReminder(id);
+        return ResponseEntity.noContent().build();
+    }
 }
