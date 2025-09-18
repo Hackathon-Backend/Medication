@@ -11,7 +11,8 @@ public enum Frequency {
     EVERY_FOUR_HOURS("Cada 4 horas"),
     EVERY_SIX_HOURS("Cada 6 horas"),
     EVERY_EIGHT_HOURS("Cada 8 horas"),
-    AS_NEEDED("Según sea necesario");
+    AS_NEEDED("Según sea necesario"),
+    CUSTOM("Personalizado");
 
     private final String displayInSpanish;
 

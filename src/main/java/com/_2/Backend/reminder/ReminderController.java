@@ -1,8 +1,8 @@
 package com._2.Backend.reminder;
 
 
-import com._2.Backend.reminder.dto.ReminderRequest;
-import com._2.Backend.reminder.dto.ReminderResponse;
+import com._2.Backend.reminder.dtos.ReminderRequest;
+import com._2.Backend.reminder.dtos.ReminderResponse;
 import com._2.Backend.reminder.services.ReminderServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;

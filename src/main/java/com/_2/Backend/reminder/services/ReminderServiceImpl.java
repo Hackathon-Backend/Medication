@@ -2,15 +2,18 @@ package com._2.Backend.reminder.services;
 
 import com._2.Backend.medication.Medication;
 import com._2.Backend.medication.MedicationRepository;
+import com._2.Backend.medication.exceptions.MedicationNotFoundException;
 import com._2.Backend.reminder.Reminder;
 import com._2.Backend.reminder.ReminderRepository;
-import com._2.Backend.reminder.ReminderService;
-import com._2.Backend.reminder.dto.ReminderMapper;
-import com._2.Backend.reminder.dto.ReminderRequest;
-import com._2.Backend.reminder.dto.ReminderResponse;
+import com._2.Backend.reminder.dtos.ReminderMapper;
+import com._2.Backend.reminder.dtos.ReminderRequest;
+import com._2.Backend.reminder.dtos.ReminderResponse;
+import com._2.Backend.reminder.exceptions.InvalidReminderTimeException;
+import com._2.Backend.reminder.exceptions.ReminderNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -37,9 +40,21 @@ public class ReminderServiceImpl implements ReminderService {
     }
 
     @Override
+    public List<ReminderResponse> getTodayReminders() {
+        return reminderRepository.findByActiveTrueOrderByTimeAsc()
+                .stream()
+                .map(ReminderMapper::entityToDto)
+                .toList();
+    }
+
+    @Override
     public ReminderResponse createReminder(ReminderRequest request) {
+        if (request.getTime() == null || request.getTime().isBefore(LocalTime.now())) {
+            throw new InvalidReminderTimeException("La hora no puede ser nula ni estar en el pasado");
+        }
+
         Medication medication = medicationRepository.findById(request.getMedicationId())
-                .orElseThrow(() -> new RuntimeException("Medicamento no encontrado"));
+                .orElseThrow(() -> new MedicationNotFoundException(request.getMedicationId()));
 
         Reminder reminder = Reminder.builder()
                 .time(request.getTime())
@@ -55,9 +70,11 @@ public class ReminderServiceImpl implements ReminderService {
     @Override
     public ReminderResponse markAsTaken(Long id) {
         Reminder reminder = reminderRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Recordatorio no encontrado"));
+                .orElseThrow(() -> new ReminderNotFoundException(id));
+
         reminder.setTaken(true);
         reminderRepository.save(reminder);
+
         return ReminderMapper.entityToDto(reminder);
     }
 }

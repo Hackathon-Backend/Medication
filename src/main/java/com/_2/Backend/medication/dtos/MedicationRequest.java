@@ -10,15 +10,18 @@ import java.time.LocalTime;
 @Data
 @NoArgsConstructor @AllArgsConstructor
 public class MedicationRequest {
-    @NotBlank (message = "Nombre del medicamento requerido")
+    @NotNull (message = "Nombre del medicamento requerido")
     private String name;
 
-    @NotBlank (message = "Dosis del medicamento requerida")
+    @NotNull (message = "Dosis del medicamento requerida")
     private String dose;
 
-    @NotBlank (message = "La frecuencia de la toma del medicamento requerida")
+    @NotNull (message = "La frecuencia de la toma del medicamento requerida")
     private Frequency frequency;
 
     @NotNull (message = "Hora a tomar el medicamento requerida")
     private LocalTime timeToTake;
+
+    private Integer intervalHours;
+    private Integer intervalDays;
 }

@@ -1,4 +1,4 @@
-package com._2.Backend.reminder.dto;
+package com._2.Backend.reminder.dtos;
 
 import com._2.Backend.reminder.Reminder;
 
