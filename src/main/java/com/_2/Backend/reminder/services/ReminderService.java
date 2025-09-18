@@ -8,6 +8,7 @@ import java.util.List;
 public interface ReminderService {
     List<ReminderResponse> getAllReminders();
     List<ReminderResponse> getActiveReminders();
+    List<ReminderResponse> getTodayReminders();
     ReminderResponse createReminder(ReminderRequest request);
     ReminderResponse markAsTaken(Long id);
 }

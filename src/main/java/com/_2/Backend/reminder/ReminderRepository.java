@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ReminderRepository extends JpaRepository<Reminder, Long> {
     List<Reminder> findByActiveTrue();
+    List<Reminder> findByActiveTrueOrderByTimeAsc();
 }

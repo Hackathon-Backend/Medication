@@ -40,6 +40,14 @@ public class ReminderServiceImpl implements ReminderService {
     }
 
     @Override
+    public List<ReminderResponse> getTodayReminders() {
+        return reminderRepository.findByActiveTrueOrderByTimeAsc()
+                .stream()
+                .map(ReminderMapper::entityToDto)
+                .toList();
+    }
+
+    @Override
     public ReminderResponse createReminder(ReminderRequest request) {
         if (request.getTime() == null || request.getTime().isBefore(LocalTime.now())) {
             throw new InvalidReminderTimeException("La hora no puede ser nula ni estar en el pasado");
