@@ -21,7 +21,6 @@ public class MedicationMapper {
         .frequencyDisplay(entity.getFrequency().getDisplayInSpanish())
         .timeToTake(entity.getTimeToTake())
         .active(entity.isActive())
-        .taken(entity.isTaken())
         .build();
     }
 }
