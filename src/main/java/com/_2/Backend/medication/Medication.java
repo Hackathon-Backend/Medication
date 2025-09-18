@@ -32,5 +32,8 @@ public class Medication {
     @NotNull
     private LocalTime timeToTake;
 
+    private Integer intervalHours;
+    private Integer intervalDays;
+
     private boolean active = true;
 }

@@ -21,4 +21,7 @@ public class MedicationRequest {
 
     @NotNull (message = "Hora a tomar el medicamento requerida")
     private LocalTime timeToTake;
+
+    private Integer intervalHours;
+    private Integer intervalDays;
 }

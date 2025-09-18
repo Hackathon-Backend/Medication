@@ -1,5 +1,6 @@
 package com._2.Backend.medication.service;
 
+import com._2.Backend.medication.Frequency;
 import com._2.Backend.medication.Medication;
 import com._2.Backend.medication.MedicationRepository;
 import com._2.Backend.medication.dtos.MedicationMapper;
@@ -19,12 +20,18 @@ public class MedicationServiceImpl  implements MedicationService{
 
     @Override
     public MedicationResponse createMedication(MedicationRequest request) {
-        Medication newMedication = MedicationMapper.dtoToEntity(request);
+        if (request.getFrequency() == Frequency.CUSTOM) {
+            if ((request.getIntervalHours() == null || request.getIntervalHours() <= 0) && (request.getIntervalDays() == null || request.getIntervalDays() <= 0)) {
+                throw new IllegalArgumentException(
+                        "Para Personalizar, deberás especificar el intérvalo de Horas o intérvalo de Días"
+                );
+            }
+        }
 
+        Medication newMedication = MedicationMapper.dtoToEntity(request);
         newMedication.setActive(true);
 
         Medication savedMedication = medicationRepository.save(newMedication);
-
         return MedicationMapper.entityToDto(savedMedication);
     }
 
@@ -53,5 +60,4 @@ public class MedicationServiceImpl  implements MedicationService{
         }
         medicationRepository.deleteById(id);
     }
-
 }
