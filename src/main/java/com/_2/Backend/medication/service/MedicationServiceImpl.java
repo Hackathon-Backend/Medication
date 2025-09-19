@@ -11,17 +11,21 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class MedicationServiceImpl  implements MedicationService{
+public class MedicationServiceImpl implements MedicationService {
+
     private final MedicationRepository medicationRepository;
 
     @Override
     public MedicationResponse createMedication(MedicationRequest request) {
+        // Validación de frecuencia CUSTOM
         if (request.getFrequency() == Frequency.CUSTOM) {
-            if ((request.getIntervalHours() == null || request.getIntervalHours() <= 0) && (request.getIntervalDays() == null || request.getIntervalDays() <= 0)) {
+            if ((request.getIntervalHours() == null || request.getIntervalHours() <= 0)
+                    && (request.getIntervalDays() == null || request.getIntervalDays() <= 0)) {
                 throw new IllegalArgumentException(
                         "Para Personalizar, deberás especificar el intervalo de Horas o intervalo de Días"
                 );
@@ -44,14 +48,21 @@ public class MedicationServiceImpl  implements MedicationService{
     }
 
     @Override
+    public Optional<MedicationResponse> getMedicationById(Long id) {
+        return medicationRepository.findById(id)
+                .map(MedicationMapper::entityToDto);
+    }
+
+    @Override
     public MedicationResponse updateMedication(Long id, MedicationRequest request) {
         Medication medication = medicationRepository.findById(id)
                 .orElseThrow(() -> new MedicationNotFoundException(id));
 
         MedicationMapper.updateEntityFromDto(request, medication);
 
-        if(request.getFrequency() == Frequency.CUSTOM) {
-            if ((request.getIntervalHours() == null || request.getIntervalHours() <= 0) && (request.getIntervalDays() == null || request.getIntervalDays() <= 0)) {
+        if (request.getFrequency() == Frequency.CUSTOM) {
+            if ((request.getIntervalHours() == null || request.getIntervalHours() <= 0)
+                    && (request.getIntervalDays() == null || request.getIntervalDays() <= 0)) {
                 throw new IllegalArgumentException(
                         "Para Personalizar, deberás especificar el intervalo de Horas o intervalo de Días"
                 );
